@@ -143,17 +143,17 @@ fn testnet_genesis(
 			balances: endowed_accounts.iter().cloned().map(|k| (k, 1 << 60)).collect(),
 		},
 		babe: BabeConfig {
-			authorities: initial_authorities.iter().map(|x| (x.0.clone(), 100)).collect(),
-			epoch_config: Some(BABE_GENESIS_EPOCH_CONFIG),
-			grandpa: GrandpaConfig {
-				authorities: initial_authorities.iter().map(|x| (x.1.clone(), 1)).collect(),
-				..Default::default()
-			},
-			sudo: SudoConfig {
-				// Assign network admin rights.
-				key: Some(root_key),
-			},
-			transaction_payment: Default::default(),
-		}
+			epoch_config: Some(node_template_runtime::BABE_GENESIS_EPOCH_CONFIG),
+			..Default::default()
+		},
+		grandpa: GrandpaConfig {
+			authorities: initial_authorities.iter().map(|x| (x.1.clone(), 1)).collect(),
+			..Default::default()
+		},
+		sudo: SudoConfig {
+			// Assign network admin rights.
+			key: Some(root_key),
+		},
+		transaction_payment: Default::default(),
 	}
 }
