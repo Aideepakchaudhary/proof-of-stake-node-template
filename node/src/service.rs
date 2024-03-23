@@ -7,10 +7,10 @@ use sp_runtime::traits::Block as BlockT;
 use sc_client_api::{Backend, BlockBackend};
 use sc_consensus_babe::SlotProportion;
 use sc_network::NetworkService;
-use sc_network_common::sync::warp::WarpSyncParams;
+// use sc_network_common::sync::warp::WarpSyncParams;
 use sc_network_sync::SyncingService;
 use sc_rpc_api::DenyUnsafe;
-use sc_service::{error::Error as ServiceError, Configuration, TaskManager, RpcHandlers};
+use sc_service::{error::Error as ServiceError, Configuration, TaskManager, RpcHandlers, WarpSyncParams};
 use sc_telemetry::{Telemetry, TelemetryWorker};
 use sc_transaction_pool_api::OffchainTransactionPoolFactory;
 pub use sc_executor::NativeElseWasmExecutor;
@@ -25,6 +25,10 @@ use crate::rpc::{FullDeps, BabeDeps, GrandpaDeps, create_full};
 
 // Our native executor instance.
 pub struct ExecutorDispatch;
+
+/// The minimum period of blocks on which justifications will be
+/// imported and generated.
+const GRANDPA_JUSTIFICATION_PERIOD: u32 = 512;
 
 impl sc_executor::NativeExecutionDispatch for ExecutorDispatch {
 	/// Only enable the benchmarking host functions when we actually want to benchmark.
@@ -255,7 +259,7 @@ pub fn new_full_base(
 	let config = sc_consensus_grandpa::Config {
 		// FIXME #1578 make this available through chainspec
 		gossip_duration: std::time::Duration::from_millis(333),
-		justification_period: 512,
+		justification_generation_period: GRANDPA_JUSTIFICATION_PERIOD,
 		name: Some(name),
 		observer_enabled: false,
 		keystore,
@@ -310,7 +314,7 @@ pub fn new_partial(
 		FullClient,
 		FullBackend,
 		FullSelectChain,
-		sc_consensus::DefaultImportQueue<Block, FullClient>,
+		sc_consensus::DefaultImportQueue<Block>,
 		sc_transaction_pool::FullPool<Block, FullClient>,
 		(
 			impl Fn(
@@ -371,6 +375,7 @@ pub fn new_partial(
 
 	let (grandpa_block_import, grandpa_link) = sc_consensus_grandpa::block_import(
 		client.clone(),
+		GRANDPA_JUSTIFICATION_PERIOD,
 		&(client.clone() as Arc<_>),
 		select_chain.clone(),
 		telemetry.as_ref().map(|x| x.handle()),
