@@ -162,3 +162,76 @@ To get all the correct dependencies, activate direnv `direnv allow`.
 ### Docker
 
 Please follow the [Substrate Docker instructions here](https://github.com/paritytech/substrate/blob/master/docker/README.md) to build the Docker container with the Substrate Node Template binary.
+
+
+### Keys:
+1.
+Secret phrase:       lens obscure stool fiber idle toy hat embody air sudden rare parade
+Network ID:        substrate
+Secret seed:       0xb57dd58fce44be3c99f9cd4fd5cd8bce40a8b8c72df48fbfb0a069f4514d4ec9
+Public key (hex):  0x5c4470591d9ada5bc1ef37366a0d2213026e593d61bfa32e55bdd3cc24385f27
+Account ID:        0x5c4470591d9ada5bc1ef37366a0d2213026e593d61bfa32e55bdd3cc24385f27
+Public key (SS58): 5E9gbMacn5jVDiP5J6159vMNbQspU8ToRo5Uut7VDKFifjJu
+SS58 Address:      5E9gbMacn5jVDiP5J6159vMNbQspU8ToRo5Uut7VDKFifjJu
+
+Secret phrase:       lens obscure stool fiber idle toy hat embody air sudden rare parade
+Network ID:        substrate
+Secret seed:       0xb57dd58fce44be3c99f9cd4fd5cd8bce40a8b8c72df48fbfb0a069f4514d4ec9
+Public key (hex):  0x23814a60d1dc9fb7426f2f962027a2e45af9e16bbb0a5a55a494a2ffd5fb61b5
+Account ID:        0x23814a60d1dc9fb7426f2f962027a2e45af9e16bbb0a5a55a494a2ffd5fb61b5
+Public key (SS58): 5CsFwVtMojE72q7TQA6k5dWAaRmMNx6wDnXHBQN7Zk9zdfV1
+SS58 Address:      5CsFwVtMojE72q7TQA6k5dWAaRmMNx6wDnXHBQN7Zk9zdfV1
+
+2.
+Secret phrase:       notable pull amount goat prize doctor waste mask diagram bomb example cube
+Network ID:        substrate
+Secret seed:       0xf90bf2ec059a5045428889e7527b83be03656ceeeaaedd87516a543e1578242e
+Public key (hex):  0xf2678a38ef0da47165f7a505048f08cdc10551968c7ce9268eacedb64094ae1b
+Account ID:        0xf2678a38ef0da47165f7a505048f08cdc10551968c7ce9268eacedb64094ae1b
+Public key (SS58): 5HYYCjHoMvNVRXBfavocxh6Y5VCnms3z1DCE9MGsWE5P7FBy
+SS58 Address:      5HYYCjHoMvNVRXBfavocxh6Y5VCnms3z1DCE9MGsWE5P7FBy
+
+Secret phrase:       notable pull amount goat prize doctor waste mask diagram bomb example cube
+Network ID:        substrate
+Secret seed:       0xf90bf2ec059a5045428889e7527b83be03656ceeeaaedd87516a543e1578242e
+Public key (hex):  0x89d05c38f2527bee6d0aa5249b872ca1157447ca59f621d45c4b05d084358ca7
+Account ID:        0x89d05c38f2527bee6d0aa5249b872ca1157447ca59f621d45c4b05d084358ca7
+Public key (SS58): 5FBQK89XGQ4Ah42YMgXMb7QbTct35wwNzQEHynR8UwgfnFqo
+SS58 Address:      5FBQK89XGQ4Ah42YMgXMb7QbTct35wwNzQEHynR8UwgfnFqo
+
+3.
+Secret phrase:       core scheme pupil prison light ramp lazy excuse fashion human fresh abandon
+Network ID:        substrate
+Secret seed:       0xa223dd13595ba5bc102f2b78cd68752528d80e2102932072d19fa218e017954d
+Public key (hex):  0x26f1116267439b1b663b6c9b0753bb27c0c42cee08c3b67d846b76c86907257a
+Account ID:        0x26f1116267439b1b663b6c9b0753bb27c0c42cee08c3b67d846b76c86907257a
+Public key (SS58): 5CwmHi8fz6kcJJTSZVn9125joPY13VyrJ8uP4mvuaXQXuAxY
+SS58 Address:      5CwmHi8fz6kcJJTSZVn9125joPY13VyrJ8uP4mvuaXQXuAxY
+
+
+Secret phrase:       core scheme pupil prison light ramp lazy excuse fashion human fresh abandon
+Network ID:        substrate
+Secret seed:       0xa223dd13595ba5bc102f2b78cd68752528d80e2102932072d19fa218e017954d
+Public key (hex):  0xbe87dc9d96f930ac22a3ce8b9a37f7f35828cffac4c5ad1a4887d350553bacbe
+Account ID:        0xbe87dc9d96f930ac22a3ce8b9a37f7f35828cffac4c5ad1a4887d350553bacbe
+Public key (SS58): 5GNXKCgKvLYuAzQaKcTTDduPSnn2Lr5Wk3Z8BC5YbRXuPY4S
+SS58 Address:      5GNXKCgKvLYuAzQaKcTTDduPSnn2Lr5Wk3Z8BC5YbRXuPY4S
+
+
+4.
+Secret phrase:       banana hello saddle erupt process globe rail helmet hawk plunge cancel fine
+Network ID:        substrate
+Secret seed:       0x3a5bd5625b0857b61af492efe70e9f424dba1ba1e4ef75d0ccc524b6a8bc7018
+Public key (hex):  0x6e7897036744b93b5c5ae1aaaea40d9b57d81a3801e6e511ba0a6daa3de1303e
+Account ID:        0x6e7897036744b93b5c5ae1aaaea40d9b57d81a3801e6e511ba0a6daa3de1303e
+Public key (SS58): 5EZYwtVqNUjRtgx1mLGJz31q26yWNzWoUySddUF2EgnduHXo
+SS58 Address:      5EZYwtVqNUjRtgx1mLGJz31q26yWNzWoUySddUF2EgnduHXo
+
+Secret phrase:       banana hello saddle erupt process globe rail helmet hawk plunge cancel fine
+Network ID:        substrate
+Secret seed:       0x3a5bd5625b0857b61af492efe70e9f424dba1ba1e4ef75d0ccc524b6a8bc7018
+Public key (hex):  0xafcebd8591a8df94bff1702f65239b307d318de2a0b9f66454b633446cbaca9a
+Account ID:        0xafcebd8591a8df94bff1702f65239b307d318de2a0b9f66454b633446cbaca9a
+Public key (SS58): 5G3DekXYwq4S7zqMuLctV6M48vENn8BRH629W4ZwUa6kXsFX
+SS58 Address:      5G3DekXYwq4S7zqMuLctV6M48vENn8BRH629W4ZwUa6kXsFX
+

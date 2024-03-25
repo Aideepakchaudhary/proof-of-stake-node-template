@@ -7,6 +7,7 @@ use node_template_runtime::{
 use sc_service::ChainType;
 use sp_consensus_babe::AuthorityId as BabeId;
 use sp_consensus_grandpa::AuthorityId as GrandpaId;
+use sp_authority_discovery::AuthorityId as AuthorityDiscoveryId;
 use sp_core::{crypto::UncheckedInto, sr25519, Pair, Public};
 use sc_telemetry::TelemetryEndpoints;
 use sp_runtime::{
@@ -43,18 +44,20 @@ fn session_keys(
 	babe: BabeId,
 	grandpa: GrandpaId,
 	im_online: ImOnlineId,
+	authority_discovery: AuthorityDiscoveryId,
 ) -> SessionKeys {
-	SessionKeys { babe, grandpa, im_online }
+	SessionKeys { babe, grandpa, im_online,  authority_discovery}
 }
 
 /// Generate an Babe authority key.
-pub fn authority_keys_from_seed(s: &str) -> (AccountId, AccountId, BabeId, GrandpaId, ImOnlineId) {
+pub fn authority_keys_from_seed(s: &str) -> (AccountId, AccountId, BabeId, GrandpaId, ImOnlineId, AuthorityDiscoveryId) {
 	(
 		get_account_id_from_seed::<sr25519::Public>(&format!("{}//stash", s)),
 		get_account_id_from_seed::<sr25519::Public>(s),
 		get_from_seed::<BabeId>(s),
 		get_from_seed::<GrandpaId>(s),
 		get_from_seed::<ImOnlineId>(s),
+		get_from_seed::<AuthorityDiscoveryId>(s),
 	)
 }
 
@@ -179,7 +182,7 @@ fn staging_network_config_genesis() -> RuntimeGenesisConfig {
 	// for i in 1 2 3 4; do for j in babe; do subkey --sr25519 inspect "$SECRET//$i//$j"; done; done
 	// for i in 1 2 3 4; do for j in grandpa; do subkey --ed25519 inspect "$SECRET//$i//$j"; done; done
 	// for i in 1 2 3 4; do for j in im_online; do subkey --sr25519 inspect "$SECRET//$i//$j"; done; done
-	let initial_authorities: Vec<(AccountId, AccountId, BabeId, GrandpaId, ImOnlineId)> = vec![
+	let initial_authorities: Vec<(AccountId, AccountId, BabeId, GrandpaId, ImOnlineId, AuthorityDiscoveryId)> = vec![
 		(
 			// 5Grpw9i5vNyF6pbbvw7vA8pC5Vo8GMUbG8zraLMmAn32kTNH
 			hex!["d41e0bf1d76de368bdb91896b0d02d758950969ea795b1e7154343ee210de649"].into(),
@@ -194,6 +197,9 @@ fn staging_network_config_genesis() -> RuntimeGenesisConfig {
 			// 5DscuovXyY1o7DxYroYjYgipn87eqYLyQA3HJ21Utb7TqAai
 			hex!["50041e469c63c994374a2829b0b0829213abd53be5113e751043318a9d7c0757"]
 				.unchecked_into(),
+			// 5DhKqkHRkndJu8vq7pi2Q5S3DfftWJHGxbEUNH43b46qNspH
+			hex!["482a3389a6cf42d8ed83888cfd920fec738ea30f97e44699ada7323f08c3380a"]
+                .unchecked_into(),
 		),
 		(
 			// 5CFDk3yCSgQ2goiaksMfRMFRS7ZU28BZqPQDeAsgZUa6FRzt
@@ -206,8 +212,11 @@ fn staging_network_config_genesis() -> RuntimeGenesisConfig {
 			// 5FyNaMc6GaioN7K9QzPJDEtGThJ1HmcruRdgtiRxaoAwn2VD
 			hex!["acdfcce0e40406fac1a8198c623ec42ea13fc627e0274bbb6c21e0811482ce13"]
 				.unchecked_into(),
-			// 5EUhcM9WPJGvhCz1UptA7ye8TgktGqbhaeSohCkAfW76q5bS
-			hex!["6ac58683d639d3992a0090ab15f8c1dcf5a5ab7652fc9de60845441f9fc93903"]
+			// 5EZaeQ8djPcq9pheJUhgerXQZt9YaHnMJpiHMRhwQeinqUW8
+			hex!["6e7e4eb42cbd2e0ab4cae8708ce5509580b8c04d11f6758dbf686d50fe9f9106"]
+				.unchecked_into(),
+			// 5DhLtiaQd1L1LU9jaNeeu9HJkP6eyg3BwXA7iNMzKm7qqruQ
+			hex!["482dbd7297a39fa145c570552249c2ca9dd47e281f0c500c971b59c9dcdcd82e"]
 				.unchecked_into(),
 		),
 		(
@@ -224,6 +233,9 @@ fn staging_network_config_genesis() -> RuntimeGenesisConfig {
 			// 5GUEUCusMfW9c229gyuDG6XUH9pi3Cs4EZR9STtw8opfKuS6
 			hex!["c2e2a133b23995a48ff46cc704ef61929ee4a29b5fa468e41019ac63f3694e1f"]
 				.unchecked_into(),
+			// 5DhKqkHRkndJu8vq7pi2Q5S3DfftWJHGxbEUNH43b46qNspH
+			hex!["482a3389a6cf42d8ed83888cfd920fec738ea30f97e44699ada7323f08c3380a"]
+				.unchecked_into(),
 		),
 		(
 			// 5FxxpyvEnE2sVujvhr6x4A4G171uv4WKSLvrUNst9M8MfdpV
@@ -238,6 +250,9 @@ fn staging_network_config_genesis() -> RuntimeGenesisConfig {
 				.unchecked_into(),
 			// 5HGzdyJakxDdnERv3nvNjd6Xmz5R39NEuuJ2B3miubDY6BHD
 			hex!["e68c9a2ee25e1999a4e87906aea429f3e5f3fc8dc9cd89f423d82860c6937b2e"]
+				.unchecked_into(),
+			// 5C4vDQxA8LTck2xJEy4Yg1hM9qjDt4LvTQaMo4Y8ne43aU6x
+			hex!["00299981a2b92f878baaf5dbeba5c18d4e70f2a1fcd9c61b32ea18daf38f4378"]
 				.unchecked_into(),
 		),
 	];
@@ -264,7 +279,7 @@ fn staging_network_config_genesis() -> RuntimeGenesisConfig {
 /// Configure initial storage state for FRAME modules.
 fn testnet_genesis(
 	wasm_binary: &[u8],
-	initial_authorities: Vec<(AccountId, AccountId, BabeId, GrandpaId, ImOnlineId)>,
+	initial_authorities: Vec<(AccountId, AccountId, BabeId, GrandpaId, ImOnlineId,AuthorityDiscoveryId)>,
 	initial_nominators: Vec<AccountId>,
 	root_key: AccountId,
 	mut endowed_accounts: Vec<AccountId>,
@@ -323,7 +338,7 @@ fn testnet_genesis(
 					(
 						x.0.clone(),
 						x.0.clone(),
-						session_keys(x.2.clone(), x.3.clone(), x.4.clone()),
+						session_keys(x.2.clone(), x.3.clone(), x.4.clone(), x.5.clone()),
 					)
 				})
 				.collect::<Vec<_>>(),
@@ -337,6 +352,7 @@ fn testnet_genesis(
 			..Default::default()
 		},
 		im_online: ImOnlineConfig { keys: vec![] },
+		authority_discovery: Default::default(),
 		sudo: SudoConfig {
 			// Assign network admin rights.
 			key: Some(root_key),

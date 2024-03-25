@@ -24,6 +24,7 @@ use frame_election_provider_support::{
 };
 use frame_system::EnsureRoot;
 use sp_api::impl_runtime_apis;
+use sp_authority_discovery::AuthorityId as AuthorityDiscoveryId;
 use sp_core::{crypto::KeyTypeId, OpaqueMetadata};
 use sp_runtime::{
 	create_runtime_str, generic::{self, Era}, impl_opaque_keys,
@@ -101,6 +102,7 @@ impl_opaque_keys! {
 		pub babe: Babe,
 		pub grandpa: Grandpa,
 		pub im_online: ImOnline,
+		pub authority_discovery: AuthorityDiscovery,
 	}
 }
 
@@ -237,6 +239,9 @@ impl pallet_babe::Config for Runtime {
 	pallet_babe::EquivocationReportSystem<Self, Offences, Historical, ReportLongevity>;
 }
 
+impl pallet_authority_discovery::Config for Runtime {
+	type MaxAuthorities = MaxAuthorities;
+}
 impl pallet_grandpa::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 
@@ -509,7 +514,7 @@ pallet_staking_reward_curve::build! {
 }
 
 parameter_types! {
-	pub const SessionsPerEra: sp_staking::SessionIndex = 6;
+	pub const SessionsPerEra: sp_staking::SessionIndex = 1; // Todo: changed from 6-> 1 for testing
 	pub const BondingDuration: sp_staking::EraIndex = 24 * 28;
 	pub const SlashDeferDuration: sp_staking::EraIndex = 24 * 7; // 1/4 the bonding duration.
 	pub const RewardCurve: &'static PiecewiseLinear<'static> = &REWARD_CURVE;
@@ -674,6 +679,7 @@ construct_runtime!(
 		Utility: pallet_utility,
 		Offences: pallet_offences,
 		ImOnline: pallet_im_online,
+		AuthorityDiscovery: pallet_authority_discovery,
 		// staking related pallets
 		ElectionProviderMultiPhase: pallet_election_provider_multi_phase,
 		Staking: pallet_staking,
@@ -892,7 +898,11 @@ impl_runtime_apis! {
 			None
 		}
 	}
-
+    impl sp_authority_discovery::AuthorityDiscoveryApi<Block> for Runtime {
+		fn authorities() -> Vec<AuthorityDiscoveryId> {
+			AuthorityDiscovery::authorities()
+		}
+	}
 	impl frame_system_rpc_runtime_api::AccountNonceApi<Block, AccountId, Nonce> for Runtime {
 		fn account_nonce(account: AccountId) -> Nonce {
 			System::account_nonce(account)
