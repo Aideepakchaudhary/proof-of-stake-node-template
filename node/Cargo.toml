@@ -22,6 +22,7 @@ futures = { version = "0.3.21", features = ["thread-pool"]}
 log = "0.4.17"
 rand = "0.8"
 hex-literal = "0.4.1"
+array-bytes = "6.1"
 
 sc-cli = { version = "0.10.0-dev", git = "https://github.com/paritytech/polkadot-sdk.git", branch = "release-polkadot-v1.1.0" }
 sp-core = { version = "21.0.0", git = "https://github.com/paritytech/polkadot-sdk.git", branch = "release-polkadot-v1.1.0" }
